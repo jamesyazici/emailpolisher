@@ -80,17 +80,15 @@ class ProductionLLMClient {
  */
 export function createLLMClient() {
     const env = process.env.NODE_ENV || 'development';
-    if (env === 'test' || env === 'development') {
-        logger.debug('Creating mock LLM client', { env });
+    // Always use mock client for Railway deployment unless API key is explicitly provided
+    if (env === 'test' || env === 'development' || !process.env.LLM_API_KEY) {
+        logger.debug('Creating mock LLM client', { env, hasApiKey: !!process.env.LLM_API_KEY });
         return new MockLLMClient();
     }
-    // Production configuration
+    // Production configuration with API key
     const apiKey = process.env.LLM_API_KEY;
     const baseUrl = process.env.LLM_BASE_URL || 'https://api.openai.com/v1';
     const model = process.env.LLM_MODEL || 'gpt-4';
-    if (!apiKey) {
-        throw new Error('LLM_API_KEY environment variable is required for production');
-    }
     logger.info('Creating production LLM client', { model, baseUrl });
     return new ProductionLLMClient(apiKey, baseUrl, model);
 }
