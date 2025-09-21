@@ -17,25 +17,73 @@ class MockLLMClient {
                 return { text: response };
             }
         }
-        // Default mock behavior - return a properly formatted email
-        const defaultResponse = `===EMAIL===
-Subject: Re: Your inquiry
+        // Smart mock behavior - analyze the baseline email and enhance it contextually
+        const contextualResponse = this.generateContextualMockResponse(params.userPrompt);
+        logger.debug('Using contextual mock LLM response');
+        return { text: contextualResponse };
+    }
+    generateContextualMockResponse(userPrompt) {
+        // Extract the baseline email from the user prompt
+        const emailMatch = userPrompt.match(/Current email:\s*Subject: (.+?)\n\n(.+?)\n\n([\s\S]+?)\n\n(.+?)(?:\n\nFocus on:|$)/);
+        if (emailMatch) {
+            const [, subject, greeting, bodyContent, closing] = emailMatch;
+            // Split body content into sections
+            const bodySections = bodyContent.split('\n\n').filter(section => section.trim().length > 0);
+            // Enhance the extracted email contextually
+            let enhancedSubject = subject;
+            let enhancedBodySections = [...bodySections];
+            // Enhance subject based on content
+            if (subject.includes('Research Collaboration')) {
+                enhancedSubject = 'Research Collaboration Inquiry — Exploring RA Opportunities';
+            }
+            else if (subject.includes('Professional Networking') && bodyContent.includes('research')) {
+                enhancedSubject = 'Research Assistant Opportunity — Exploring Your Lab';
+            }
+            else if (subject.includes('Professional Networking') && bodyContent.includes('internship')) {
+                enhancedSubject = 'Internship Opportunity — Professional Connection';
+            }
+            else if (subject.includes('Thank You')) {
+                enhancedSubject = subject; // Keep thank you subjects as is
+            }
+            // Enhance body content based on context
+            enhancedBodySections = enhancedBodySections.map(section => {
+                let enhanced = section;
+                // Make language more specific and professional
+                enhanced = enhanced.replace('exploring research opportunities', 'exploring research assistant opportunities in your lab');
+                enhanced = enhanced.replace('professional networking and collaboration', 'potential collaboration opportunities');
+                enhanced = enhanced.replace('Would you be open to a brief call next week?', 'Would you be available for a brief conversation to discuss how I might contribute to your research?');
+                enhanced = enhanced.replace('I\'m eager to learn more about', 'I would appreciate the opportunity to learn more about');
+                return enhanced;
+            });
+            return `===EMAIL===
+Subject: ${enhancedSubject}
+
+${greeting}
+
+${enhancedBodySections.join('\n\n')}
+
+${closing}
+
+===EVAL===
+This email has been enhanced for better clarity and professionalism. The subject line is more specific, the language is more polished, and the content is tailored to academic/research communication while maintaining appropriate tone.`;
+        }
+        // Fallback to improved default if parsing fails
+        return `===EMAIL===
+Subject: Professional Inquiry — Exploring Opportunities
 
 Dear {{recipient_name}},
 
-Thank you for reaching out. I appreciate your interest in connecting and would be happy to help.
+I hope this message finds you well. I am writing to express my interest in connecting and exploring potential opportunities for collaboration.
 
-I believe my background in the field aligns well with what you're looking for, and I'd welcome the opportunity to discuss this further.
+Your work has caught my attention, and I believe there may be valuable opportunities for us to discuss how we might work together.
 
-Would you be available for a brief call next week to explore how we might work together?
+I would greatly appreciate the opportunity to learn more about your current projects and share how my background might align with your needs.
 
 Best regards,
 {{sender_name}}
 
 ===EVAL===
-This email maintains a professional tone while being concise and clear. The structure follows best practices with a clear subject, greeting, purpose, and call to action. The language is appropriate for business communication.`;
-        logger.debug('Using default mock LLM response');
-        return { text: defaultResponse };
+This email maintains a professional and respectful tone while being clear about the sender's intentions. It shows genuine interest and opens the door for meaningful conversation.`;
     }
     /**
      * Configure mock responses for testing
