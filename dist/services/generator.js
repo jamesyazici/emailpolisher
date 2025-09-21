@@ -1,16 +1,19 @@
 import { categorize } from './categorize.js';
+import { validateAndImproveEmail } from './emailValidator.js';
 /**
  * Generate completely custom emails based on user input and context
  */
 export function generateCustomEmail(input) {
     const categorization = categorize(input.text);
     const content = generateContentFromInput(input.text, categorization.category, input.tone);
-    return {
+    const initialEmail = {
         subject: content.subject,
         greeting: content.greeting,
         bodySections: content.bodySections,
         closing: content.closing
     };
+    // Validate and improve the generated email
+    return validateAndImproveEmail(initialEmail);
 }
 /**
  * Generate email content dynamically based on the specific user input
@@ -147,17 +150,26 @@ function generateBody(context, category, tone, originalText) {
     return sections;
 }
 /**
- * Generate introduction based on seniority and context
+ * Generate natural introduction based on context
  */
 function generateIntroduction(context, tone) {
-    const level = tone.seniority === 'student' ? 'student' : 'professional';
+    // Always start with a natural greeting
+    let intro = "I hope this message finds you well.";
+    // Add specific context if we have meaningful information
     if (context.school && tone.seniority === 'student') {
-        return `I'm a ${level} currently at ${context.school.charAt(0).toUpperCase() + context.school.slice(1)}.`;
+        intro += ` My name is [Your Name], and I'm currently a student at ${context.school.charAt(0).toUpperCase() + context.school.slice(1)}.`;
     }
-    if (tone.formality >= 3) {
-        return `I'm a ${level} reaching out to connect with you.`;
+    else if (tone.seniority === 'student') {
+        intro += " My name is [Your Name], and I'm a student interested in professional opportunities.";
     }
-    return null; // Sometimes skip intro for casual emails
+    else if (tone.formality >= 4) {
+        intro += " My name is [Your Name], and I'm a professional in the field.";
+    }
+    else {
+        // For casual/medium formality, just the greeting is enough
+        return intro;
+    }
+    return intro;
 }
 /**
  * Generate connection/context section
@@ -176,25 +188,35 @@ function generateConnectionSection(context, tone) {
  */
 function generatePurposeSection(context, tone, originalText) {
     if (context.intent === 'research_assistant') {
-        return 'I\'m very interested in research opportunities and would love to explore the possibility of joining your research team as a research assistant.';
+        return 'I am writing to inquire about research assistant opportunities in your lab. I am very interested in contributing to your research and would appreciate the chance to discuss how my background and interests align with your current projects.';
     }
     if (context.intent === 'internship' && context.company) {
-        return `I'm actively seeking internship opportunities and am particularly interested in ${context.company.charAt(0).toUpperCase() + context.company.slice(1)}. I'd love to learn more about potential openings and how I might contribute to your team.`;
+        return `I am currently seeking internship opportunities and am particularly drawn to ${context.company.charAt(0).toUpperCase() + context.company.slice(1)}. I would welcome the opportunity to learn more about potential openings and discuss how I might contribute to your team.`;
     }
     if (context.intent === 'conversation' && context.specific_reason) {
         if (context.company) {
-            return `I'm very interested in ${context.company.charAt(0).toUpperCase() + context.company.slice(1)} and would love to ${context.specific_reason} working there from someone with your experience.`;
+            return `I am very interested in learning more about ${context.company.charAt(0).toUpperCase() + context.company.slice(1)} and would greatly appreciate the opportunity to ${context.specific_reason} from someone with your experience.`;
         }
-        return `I'd love to ${context.specific_reason} and hear about your career journey.`;
+        return `I would greatly appreciate the opportunity to ${context.specific_reason} and learn about your career journey.`;
     }
     if (context.intent === 'networking' && context.company) {
-        return `I'm interested in connecting with professionals at ${context.company.charAt(0).toUpperCase() + context.company.slice(1)} to learn more about the company culture and potential opportunities.`;
+        return `I am interested in learning more about ${context.company.charAt(0).toUpperCase() + context.company.slice(1)} and would value the chance to connect with professionals in the organization to better understand the company culture and potential opportunities.`;
     }
-    // Fallback: use a more general version of their intent
-    const intent = originalText.length > 100 ?
-        originalText.substring(0, 100) + '...' :
-        originalText;
-    return `I'm reaching out because ${intent.replace(/^I\s/, '').toLowerCase()}.`;
+    // Fallback: create a more natural version
+    let purpose = originalText.toLowerCase();
+    // Clean up the purpose statement
+    purpose = purpose.replace(/^(can i|could i|may i)/, 'I would like to');
+    purpose = purpose.replace(/^i want to/, 'I am interested in');
+    purpose = purpose.replace(/^i need to/, 'I would like to');
+    // Fix common phrase issues
+    purpose = purpose.replace('how i contribute', 'how I might contribute');
+    purpose = purpose.replace('how i might', 'how I might');
+    // Ensure it starts with "I am" for consistency
+    if (!purpose.startsWith('i am') && !purpose.startsWith('i would')) {
+        purpose = `I am writing to inquire about ${purpose}`;
+    }
+    // Capitalize first letter
+    return purpose.charAt(0).toUpperCase() + purpose.slice(1) + '.';
 }
 /**
  * Generate call to action based on context
