@@ -63,6 +63,11 @@ function improveGrammarAndFlow(sections) {
         if (improved.includes("I'm very interested in") && improved.includes("and would love to")) {
             improved = improved.replace("and would love to", "I would appreciate the opportunity to");
         }
+        // Remove awkward phrases
+        improved = improved.replace(/\. Happy to collaborate on next steps\./g, '.');
+        improved = improved.replace(/Happy to collaborate on next steps\./g, '');
+        // Fix double periods
+        improved = improved.replace(/\.\./g, '.');
         return improved.trim();
     });
 }
