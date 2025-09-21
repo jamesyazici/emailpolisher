@@ -10,6 +10,11 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Railway-specific health check
+app.get('/', (req, res) => {
+  res.redirect('/index.html');
+});
+
 app.use(express.json());
 
 // Serve static files from public directory
