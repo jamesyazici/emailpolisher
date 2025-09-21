@@ -1,0 +1,144 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Pipeline Integration > snapshot tests by category > should process followup email correctly 1`] = `
+{
+  "checks": {
+    "clarity": true,
+    "completeness": true,
+    "ethical": true,
+    "professionalism": true,
+    "warnings": [],
+  },
+  "draft": {
+    "bodySections": [
+      "I'm following up on my note from {{prior_contact_date}} about {{topic}}.",
+      "I wanted to see if {{desired_outcome}}.",
+      "If helpful, I can send more details or find time for a quick call. I'm eager to learn more about ...",
+    ],
+    "closing": "Thank you for your time, {{sender_name}}",
+    "greeting": "Hello {{recipient_name}},",
+    "subject": "Following up on {{topic}}",
+  },
+  "meta": {
+    "category": "followup",
+    "matchedRules": [
+      "following up",
+      "last week",
+      "our conversation",
+    ],
+  },
+}
+`;
+
+exports[`Pipeline Integration > snapshot tests by category > should process networking email correctly 1`] = `
+{
+  "checks": {
+    "clarity": true,
+    "completeness": true,
+    "ethical": true,
+    "professionalism": true,
+    "warnings": [],
+  },
+  "draft": {
+    "bodySections": [
+      "My name is {{sender_name}}, a {{role_or_student}} at {{org}}.",
+      "I enjoyed your work on {{recipient_work_ref}}.",
+      "I'm reaching out regarding {{email_goal}}.",
+      "Would you be open to a brief call next week? I'm eager to learn more about ...",
+    ],
+    "closing": "Best regards, {{sender_name}} {{contact_block}}",
+    "greeting": "Dear {{recipient_name}},",
+    "subject": "Introduction — {{topic}}",
+  },
+  "meta": {
+    "category": "networking",
+    "matchedRules": [
+      "connect",
+      "your work",
+    ],
+  },
+}
+`;
+
+exports[`Pipeline Integration > snapshot tests by category > should process other category email correctly 1`] = `
+{
+  "checks": {
+    "clarity": true,
+    "completeness": true,
+    "ethical": true,
+    "professionalism": true,
+    "warnings": [],
+  },
+  "draft": {
+    "bodySections": [
+      "Could you please provide information about course prerequisites and requirements? I'm eager to learn more about ...",
+    ],
+    "closing": "Best regards, {{sender_name}}",
+    "greeting": "Hello {{recipient_name}},",
+    "subject": "{{topic}}",
+  },
+  "meta": {
+    "category": "other",
+    "matchedRules": [],
+  },
+}
+`;
+
+exports[`Pipeline Integration > snapshot tests by category > should process referral email correctly 1`] = `
+{
+  "checks": {
+    "clarity": true,
+    "completeness": false,
+    "ethical": true,
+    "professionalism": true,
+    "warnings": [
+      "COMPLETENESS_MISSING_CTA",
+    ],
+  },
+  "draft": {
+    "bodySections": [
+      "I'm applying to {{target_company}} for {{role_or_position}}, and I wondered if you might feel comfortable referring me.",
+      "My background includes {{skills_or_projects}}, which I believe aligns with the role. I'm eager to learn more about ...",
+    ],
+    "closing": "Thank you for considering, {{sender_name}}",
+    "greeting": "Hi {{recipient_name}},",
+    "subject": "Referral Request — {{role_or_position}}",
+  },
+  "meta": {
+    "category": "referral",
+    "matchedRules": [
+      "position",
+      "resume",
+    ],
+  },
+}
+`;
+
+exports[`Pipeline Integration > snapshot tests by category > should process thankyou email correctly 1`] = `
+{
+  "checks": {
+    "clarity": true,
+    "completeness": true,
+    "ethical": true,
+    "professionalism": true,
+    "warnings": [],
+  },
+  "draft": {
+    "bodySections": [
+      "Thank you for {{specific_reason}}.",
+      "I look forward to staying in touch. I'm eager to learn more about ...",
+    ],
+    "closing": "Sincerely, {{sender_name}}",
+    "greeting": "Dear {{recipient_name}},",
+    "subject": "Thank You — {{topic}}",
+  },
+  "meta": {
+    "category": "thankyou",
+    "matchedRules": [
+      "thank you",
+      "appreciate",
+      "taking the time",
+    ],
+  },
+}
+`;

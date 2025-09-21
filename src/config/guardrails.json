@@ -1,0 +1,11 @@
+{
+  "blacklist_phrases": [
+    "I guarantee you'll get the job",
+    "This is 100% certain",
+    "I promise you will be hired"
+  ],
+  "slang_regex": "(\\bLOL\\b|\\bomg\\b|\\blmao\\b|\\bidk\\b|\\bwtf\\b)",
+  "emoji_regex": "[\\u{1F300}-\\u{1FAD6}]",
+  "attachment_keywords": ["attached", "enclosed"],
+  "link_regex": "https?://\\S+"
+}

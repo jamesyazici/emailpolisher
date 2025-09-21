@@ -1,0 +1,132 @@
+{
+  "networking": [
+    {
+      "rough": "hey im a cs student loved your article on distributed systems can we talk?",
+      "polished": "Subject: Introduction — Distributed Systems\n\nDear Dr. Nguyen,\n\nMy name is {{sender_name}}, a CS student at {{org}}. I enjoyed your article on distributed systems, particularly your perspective on consensus protocols.\n\nI'm reaching out to ask if you'd be open to a brief call next week to discuss your research and potential ways I might get involved.\n\nBest regards,\n{{sender_name}}\n{{contact_block}}"
+    },
+    {
+      "rough": "Bullet points: - math/stat undergrad - interested in quant - read your post on factor models - advice on courses?",
+      "polished": "Subject: Course Guidance for Quant Path\n\nHello {{recipient_name}},\n\nI'm {{sender_name}}, an undergraduate in mathematics and statistics at {{org}}. I recently read your post on factor models and found your breakdown of risk premia especially helpful.\n\nWould you be open to sharing brief guidance on which advanced courses would best prepare me for a quant role?\n\nThank you for your time,\n{{sender_name}}"
+    },
+    {
+      "rough": "International student here; admire your lab's work on fMRI. Any RA positions?",
+      "polished": "Subject: Inquiry About Research Assistant Opportunities — fMRI Lab\n\nDear Prof. {{recipient_name}},\n\nI am {{sender_name}}, an international student focusing on computational neuroscience. I admire your lab's fMRI research on attention and control.\n\nIf feasible, I'd appreciate the opportunity to learn whether any research assistant roles may be available this semester.\n\nKind regards,\n{{sender_name}}"
+    },
+    {
+      "rough": "I'm a bootcamp grad, building portfolio in backend. Saw your microservices talk. Could you spare 15 minutes for advice?",
+      "polished": "Subject: Brief Advice Request — Microservices Career Path\n\nHello {{recipient_name}},\n\nMy name is {{sender_name}}. I recently completed a software engineering bootcamp and am building a backend portfolio. Your recent talk on microservices and observability was insightful.\n\nIf you're available, I'd value a 15-minute call to ask a few targeted questions about early-career positioning in backend.\n\nThanks so much,\n{{sender_name}}"
+    },
+    {
+      "rough": "Hi, I'm a student interested in healthcare AI. Read your paper on radiology triage; intrigued by threshold strategies. Can we chat?",
+      "polished": "Subject: Introduction — Healthcare AI & Radiology Triage\n\nDear Dr. {{recipient_name}},\n\nI'm {{sender_name}}, a student interested in healthcare AI. I read your paper on radiology triage and was particularly intrigued by your thresholding strategy for urgent cases.\n\nWould you be open to a brief conversation next week?\n\nBest regards,\n{{sender_name}}"
+    },
+    {
+      "rough": "Name's {{sender_name}}. From {{org}}. Loved your keynote on scaling LLMs. Any internships in your team?",
+      "polished": "Subject: Internship Interest — LLM Systems\n\nHello {{recipient_name}},\n\nI'm {{sender_name}} from {{org}}. I enjoyed your keynote on scaling large language models—especially the section on inference efficiency.\n\nIf your team anticipates internships, I'd be grateful for any guidance on how to prepare and apply.\n\nThank you,\n{{sender_name}}"
+    }
+  ],
+  "followup": [
+    {
+      "rough": "just checking in from last week about internship",
+      "polished": "Subject: Following Up on Summer Internship Inquiry\n\nHello {{recipient_name}},\n\nI'm following up on my note from last week regarding the summer internship. I wanted to see if you had a chance to review my application.\n\nIf helpful, I can share additional materials or find time for a quick call.\n\nThank you for your time,\n{{sender_name}}"
+    },
+    {
+      "rough": "Re: coffee chat we mentioned after the meetup. Any time free?",
+      "polished": "Subject: Following Up on Coffee Chat\n\nHi {{recipient_name}},\n\nIt was great meeting you at the meetup. Following up to see if you might have availability for a short coffee chat next week.\n\nHappy to work around your schedule.\n\nBest,\n{{sender_name}}"
+    },
+    {
+      "rough": "We spoke on 9/1 about a data analyst role. Any updates?",
+      "polished": "Subject: Following Up — Data Analyst Role (9/1 Conversation)\n\nDear {{recipient_name}},\n\nI'm writing to follow up on our 9/1 conversation regarding the data analyst role. I remain very interested and would appreciate any updates you can share on next steps.\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "gentle nudge on my previous email re: research collab proposal",
+      "polished": "Subject: Follow-Up on Research Collaboration Proposal\n\nHello {{recipient_name}},\n\nI'm sending a quick follow-up regarding the collaboration proposal I shared. I'd welcome your feedback and would be glad to adjust scope or timeline based on your priorities.\n\nWarm regards,\n{{sender_name}}"
+    },
+    {
+      "rough": "Ping on the intro to your colleague you mentioned.",
+      "polished": "Subject: Follow-Up on Colleague Introduction\n\nHi {{recipient_name}},\n\nJust a brief follow-up on the introduction to your colleague you kindly offered. Please let me know if I can share a short blurb to make the handoff easier.\n\nThanks again,\n{{sender_name}}"
+    },
+    {
+      "rough": "Checking back in about scheduling a talk for my CS club.",
+      "polished": "Subject: Follow-Up — CS Club Talk Scheduling\n\nDear {{recipient_name}},\n\nI wanted to follow up about scheduling your talk for our CS club. We're flexible on dates and can align with your availability.\n\nThank you for considering,\n{{sender_name}}"
+    }
+  ],
+  "referral": [
+    {
+      "rough": "Could you refer me to the SWE intern role you shared?",
+      "polished": "Subject: Referral Request — Software Engineering Internship\n\nHello {{recipient_name}},\n\nI hope you're well. I noticed the SWE internship you shared and wondered if you might feel comfortable referring me. I've attached a brief résumé and portfolio link for context.\n\nI appreciate your consideration,\n{{sender_name}}"
+    },
+    {
+      "rough": "Applying to Quant Research at {{target_company}}. You worked there—any chance for a referral?",
+      "polished": "Subject: Referral Request — Quant Research at {{target_company}}\n\nDear {{recipient_name}},\n\nI'm applying to the Quant Research role at {{target_company}}. Given your experience there, I wondered if you'd be open to referring me if you feel my background aligns. I've included a short summary below and can share more details.\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "Would you be willing to recommend me for Product Analyst? I've done A/B testing and SQL.",
+      "polished": "Subject: Referral Request — Product Analyst\n\nHi {{recipient_name}},\n\nIf you feel comfortable, would you consider referring me for the Product Analyst role? My background includes A/B testing, SQL, and dashboarding for product insights.\n\nI appreciate your time,\n{{sender_name}}"
+    },
+    {
+      "rough": "I'm a junior at {{org}}; aiming for ML Infra internships. Could you refer me to your team?",
+      "polished": "Subject: Referral Request — ML Infrastructure Internship\n\nHello {{recipient_name}},\n\nI'm a junior at {{org}} focused on ML infrastructure. If appropriate, I'd be grateful for a referral to your team. I've attached a concise résumé and can provide additional context on relevant projects.\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "You mentioned openings at your startup. Mind a referral? Happy to send a 3-bullet summary.",
+      "polished": "Subject: Referral Request — Openings at {{company}}\n\nHi {{recipient_name}},\n\nI recall you mentioned openings at {{company}}. If you feel it's a fit, I'd be grateful for a referral. I can provide a 3-bullet summary of my experience to simplify the process.\n\nThanks for considering,\n{{sender_name}}"
+    },
+    {
+      "rough": "Targeting SRE track; strong Linux + monitoring. Would you vouch for me?",
+      "polished": "Subject: Referral Request — SRE Path\n\nDear {{recipient_name}},\n\nI'm pursuing the SRE track and have experience with Linux administration, incident response, and monitoring/observability. If comfortable, would you consider referring me for relevant roles?\n\nKind regards,\n{{sender_name}}"
+    }
+  ],
+  "thankyou": [
+    {
+      "rough": "thanks for the interview today!",
+      "polished": "Subject: Thank You — Interview Today\n\nHello {{recipient_name}},\n\nThank you for the conversation today. I appreciated learning more about the team and the role, and I'm excited about the possibility of contributing.\n\nBest regards,\n{{recipient_name}}"
+    },
+    {
+      "rough": "Appreciate your time reviewing my portfolio last week.",
+      "polished": "Subject: Thank You — Portfolio Review\n\nDear {{recipient_name}},\n\nThank you for reviewing my portfolio last week. Your suggestions on improving case study structure were very helpful.\n\nSincerely,\n{{sender_name}}"
+    },
+    {
+      "rough": "Grateful for the intro to your colleague.",
+      "polished": "Subject: Thank You for the Introduction\n\nHi {{recipient_name}},\n\nI appreciate the introduction to your colleague. I'll follow up with them directly and keep you posted.\n\nThanks again,\n{{sender_name}}"
+    },
+    {
+      "rough": "Thanks for coming to speak at our club.",
+      "polished": "Subject: Thank You for Speaking at Our Club\n\nHello {{recipient_name}},\n\nThank you for sharing your insights at our club meeting. The discussion on career paths was motivating and practical.\n\nBest,\n{{sender_name}}"
+    },
+    {
+      "rough": "Thanks for the advice about grad school.",
+      "polished": "Subject: Thank You for the Grad School Advice\n\nDear {{recipient_name}},\n\nI'm grateful for your candid advice about graduate programs and timelines. It will help me plan my next steps thoughtfully.\n\nWarm regards,\n{{sender_name}}"
+    },
+    {
+      "rough": "Thanks for helping debug my repo yesterday.",
+      "polished": "Subject: Thank You for Your Help Yesterday\n\nHi {{recipient_name}},\n\nThank you for helping me debug the repository. Your suggestion about dependency pinning solved the issue.\n\nAppreciatively,\n{{sender_name}}"
+    }
+  ],
+  "other": [
+    {
+      "rough": "Requesting a transcript letter for internship application.",
+      "polished": "Subject: Transcript Letter Request\n\nDear {{recipient_name}},\n\nI'm requesting a transcript letter for my internship application. Please let me know if there are forms I should complete.\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "Can we move our meeting from Tue to Thu afternoon?",
+      "polished": "Subject: Meeting Reschedule Request\n\nHello {{recipient_name}},\n\nWould it be possible to reschedule our meeting from Tuesday to Thursday afternoon? I can adjust to a time that works best for you.\n\nBest regards,\n{{sender_name}}"
+    },
+    {
+      "rough": "I'd like permission to use your dataset for a class project.",
+      "polished": "Subject: Permission Request to Use Dataset\n\nHi {{recipient_name}},\n\nMay I have permission to use your dataset for a class project? I will follow any citation or usage guidelines you require.\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "Please confirm receipt of my scholarship docs.",
+      "polished": "Subject: Confirmation of Scholarship Documents\n\nDear {{recipient_name}},\n\nCould you confirm receipt of my scholarship documents when convenient?\n\nThank you,\n{{sender_name}}"
+    },
+    {
+      "rough": "Report an issue with the career portal upload.",
+      "polished": "Subject: Issue with Career Portal Upload\n\nHello {{recipient_name}},\n\nI encountered an error while uploading materials to the career portal. If there's a preferred format or workaround, I'm happy to adjust.\n\nBest,\n{{sender_name}}"
+    },
+    {
+      "rough": "Seeking clarification about project deadline extension policy.",
+      "polished": "Subject: Clarification on Deadline Extension Policy\n\nDear {{recipient_name}},\n\nCould you clarify the policy regarding project deadline extensions? I want to ensure I follow the correct process.\n\nKind regards,\n{{sender_name}}"
+    }
+  ]
+}

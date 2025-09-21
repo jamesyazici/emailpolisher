@@ -1,0 +1,45 @@
+{
+  "formality": {
+    "casual_to_formal": {
+      "hey": "hello",
+      "just": "",
+      "thanks a ton": "thank you",
+      "wanna": "would like to",
+      "gonna": "going to",
+      "idk": "I am not sure"
+    }
+  },
+  "warmth": {
+    "niceties": [
+      "I hope you're well.",
+      "I appreciate your time.",
+      "I hope this message finds you well."
+    ]
+  },
+  "confidence": {
+    "hedges": [
+      "might",
+      "perhaps",
+      "I was wondering if",
+      "it could be"
+    ],
+    "assertive": [
+      "I recommend",
+      "I propose",
+      "I suggest",
+      "I am confident"
+    ]
+  },
+  "seniority": {
+    "student_additions": [
+      "I'm eager to learn more about ...",
+      "I would appreciate any guidance you can share.",
+      "I am still building experience and am excited to grow."
+    ],
+    "professional_additions": [
+      "Happy to collaborate on next steps.",
+      "We can align on scope and timing.",
+      "Looking forward to working together."
+    ]
+  }
+}

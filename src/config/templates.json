@@ -1,0 +1,44 @@
+{
+  "networking": {
+    "required": ["subject", "greeting", "intro", "personalization", "purpose", "cta", "closing"],
+    "subject": "Introduction — {topic}",
+    "greeting": "Dear {recipient_name},",
+    "intro": "My name is {sender_name}, a {role_or_student} at {org}.",
+    "personalization": "I enjoyed your work on {recipient_work_ref}.",
+    "purpose": "I'm reaching out regarding {email_goal}.",
+    "cta": "Would you be open to a brief call next week?",
+    "closing": "Best regards,\n{sender_name}\n{contact_block}"
+  },
+  "followup": {
+    "required": ["subject", "greeting", "context", "purpose", "cta", "closing"],
+    "subject": "Following up on {topic}",
+    "greeting": "Hello {recipient_name},",
+    "context": "I'm following up on my note from {prior_contact_date} about {topic}.",
+    "purpose": "I wanted to see if {desired_outcome}.",
+    "cta": "If helpful, I can send more details or find time for a quick call.",
+    "closing": "Thank you for your time,\n{sender_name}"
+  },
+  "referral": {
+    "required": ["subject", "greeting", "request", "alignment", "closing"],
+    "subject": "Referral Request — {role_or_position}",
+    "greeting": "Hi {recipient_name},",
+    "request": "I'm applying to {target_company} for {role_or_position}, and I wondered if you might feel comfortable referring me.",
+    "alignment": "My background includes {skills_or_projects}, which I believe aligns with the role.",
+    "closing": "Thank you for considering,\n{sender_name}"
+  },
+  "thankyou": {
+    "required": ["subject", "greeting", "thanks", "optional_future", "closing"],
+    "subject": "Thank You — {topic}",
+    "greeting": "Dear {recipient_name},",
+    "thanks": "Thank you for {specific_reason}.",
+    "optional_future": "I look forward to staying in touch.",
+    "closing": "Sincerely,\n{sender_name}"
+  },
+  "other": {
+    "required": ["subject", "greeting", "purpose", "closing"],
+    "subject": "{topic}",
+    "greeting": "Hello {recipient_name},",
+    "purpose": "{message_purpose}",
+    "closing": "Best regards,\n{sender_name}"
+  }
+}

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Polisher - Professional Email Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+            min-height: 600px;
+        }
+        
+        .input-section, .output-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            min-height: 120px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        /* Custom Slider Styles */
+        .slider-group {
+            margin-bottom: 20px;
+        }
+        
+        .slider-container {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #e0e6ed 0%, #667eea 50%, #764ba2 100%);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .slider-value {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 14px;
+        }
+        
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+        
+        .email-output {
+            background: #f8f9fa;
+            border: 2px solid #e0e6ed;
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-y: auto;
+        }
+        
+        .email-output.loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            font-family: inherit;
+        }
+        
+        .email-meta {
+            background: white;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .meta-value {
+            color: #667eea;
+        }
+        
+        .copy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+        
+        .status-indicator {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .quick-tips {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quick-tips h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .quick-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-tips li {
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .quick-tips li:before {
+            content: "💡 ";
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Email Polisher</h1>
+            <p>Transform your thoughts into professional emails with AI</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2 class="section-title">✍️ Compose Your Message</h2>
+                
+                <div class="quick-tips">
+                    <h4>Quick Tips:</h4>
+                    <ul>
+                        <li>Write naturally - "I want to connect about job opportunities"</li>
+                        <li>Use AI enhancement for the best results</li>
+                        <li>Adjust sliders to match your communication style</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="emailText">Your Message</label>
+                    <textarea id="emailText" placeholder="Example: I want to connect with you about software engineering opportunities at your company. I'm interested in learning more about your team and the work you do."></textarea>
+                </div>
+                
+                <!-- Formality Slider -->
+                <div class="slider-group">
+                    <label for="formality">Formality Level</label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="5" value="3" class="slider" id="formality">
+                        <div class="slider-labels">
+                            <span>Very Casual</span>
+                            <span>Casual</span>
+                            <span>Neutral</span>
+                            <span>Formal</span>
+                            <span>Very Formal</span>
+                        </div>
+                        <div class="slider-value" id="formalityValue">Neutral (3)</div>
+                    </div>
+                </div>
+                
+                <!-- Confidence Slider -->
+                <div class="slider-group">
+                    <label for="confidence">Confidence Level</label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="5" value="3" class="slider" id="confidence">
+                        <div class="slider-labels">
+                            <span>Hesitant</span>
+                            <span>Uncertain</span>
+                            <span>Moderate</span>
+                            <span>Confident</span>
+                            <span>Very Confident</span>
+                        </div>
+                        <div class="slider-value" id="confidenceValue">Moderate (3)</div>
+                    </div>
+                </div>
+                
+                <!-- Seniority Toggle -->
+                <div class="toggle-group">
+                    <div>
+                        <label style="margin-bottom: 5px;">Professional Level</label>
+                        <div style="font-size: 14px; color: #666;">
+                            <span id="seniorityLabel">Professional</span>
+                        </div>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="seniority">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+                
+                <!-- Length Slider -->
+                <div class="slider-group">
+                    <label for="length">Email Length</label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="3" value="2" class="slider" id="length">
+                        <div class="slider-labels">
+                            <span>Short</span>
+                            <span>Medium</span>
+                            <span>Long</span>
+                        </div>
+                        <div class="slider-value" id="lengthValue">Medium (2)</div>
+                    </div>
+                </div>
+                
+                <!-- AI Enhancement Toggle -->
+                <div class="toggle-group">
+                    <div>
+                        <label style="margin-bottom: 5px;">AI Enhancement</label>
+                        <div style="font-size: 14px; color: #666;">
+                            Get AI-powered improvements for better results
+                        </div>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="useLLM" checked>
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+                
+                <button class="generate-btn" onclick="generateEmail()">
+                    ✨ Generate Professional Email
+                </button>
+            </div>
+            
+            <!-- Output Section -->
+            <div class="output-section">
+                <h2 class="section-title">📧 Your Professional Email</h2>
+                
+                <div id="emailMeta" class="email-meta" style="display: none;">
+                    <div class="meta-item">
+                        <span class="meta-label">Category:</span>
+                        <span class="meta-value" id="emailCategory">-</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Quality Score:</span>
+                        <span class="meta-value" id="qualityScore">-</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">AI Enhanced:</span>
+                        <span class="meta-value" id="aiEnhanced">-</span>
+                    </div>
+                </div>
+                
+                <div id="emailOutput" class="email-output loading">
+                    👋 Enter your message and click "Generate Professional Email" to see your polished email here!
+                </div>
+                
+                <button id="copyBtn" class="copy-btn" onclick="copyToClipboard()" style="display: none;">
+                    📋 Copy to Clipboard
+                </button>
+                
+                <div id="statusMessage" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentEmail = null;
+        
+        // Update slider values in real-time
+        document.getElementById('formality').addEventListener('input', function() {
+            const values = ['Very Casual', 'Casual', 'Neutral', 'Formal', 'Very Formal'];
+            document.getElementById('formalityValue').textContent = `${values[this.value - 1]} (${this.value})`;
+        });
+        
+        document.getElementById('confidence').addEventListener('input', function() {
+            const values = ['Hesitant', 'Uncertain', 'Moderate', 'Confident', 'Very Confident'];
+            document.getElementById('confidenceValue').textContent = `${values[this.value - 1]} (${this.value})`;
+        });
+        
+        document.getElementById('length').addEventListener('input', function() {
+            const values = ['Short', 'Medium', 'Long'];
+            document.getElementById('lengthValue').textContent = `${values[this.value - 1]} (${this.value})`;
+        });
+        
+        document.getElementById('seniority').addEventListener('change', function() {
+            document.getElementById('seniorityLabel').textContent = this.checked ? 'Student' : 'Professional';
+        });
+        
+        async function generateEmail() {
+            const text = document.getElementById('emailText').value.trim();
+            if (!text) {
+                showStatus('Please enter your message first!', 'error');
+                return;
+            }
+            
+            const lengthMap = {1: 'short', 2: 'medium', 3: 'long'};
+            
+            const payload = {
+                text: text,
+                tone: {
+                    formality: parseInt(document.getElementById('formality').value),
+                    confidence: parseInt(document.getElementById('confidence').value),
+                    seniority: document.getElementById('seniority').checked ? 'student' : 'professional',
+                    length: lengthMap[document.getElementById('length').value]
+                },
+                useLLM: document.getElementById('useLLM').checked
+            };
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/refine', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Failed to generate email');
+                }
+                
+                const result = await response.json();
+                displayEmail(result);
+                
+            } catch (error) {
+                showStatus('Failed to generate email: ' + error.message, 'error');
+                document.getElementById('emailOutput').className = 'email-output';
+                document.getElementById('emailOutput').textContent = 'Error generating email. Please try again.';
+            }
+        }
+        
+        function displayEmail(result) {
+            const email = result.refined || result.baseline;
+            const wasRefined = !!result.refined;
+            
+            // Format the email
+            const emailText = `Subject: ${email.subject}
+
+${email.greeting}
+
+${email.bodySections.join('\n\n')}
+
+${email.closing}`;
+            
+            // Update output
+            document.getElementById('emailOutput').className = 'email-output';
+            document.getElementById('emailOutput').textContent = emailText;
+            currentEmail = emailText;
+            
+            // Update metadata
+            document.getElementById('emailMeta').style.display = 'block';
+            document.getElementById('emailCategory').textContent = getEmailCategory(result);
+            document.getElementById('qualityScore').textContent = calculateQualityScore(result);
+            document.getElementById('aiEnhanced').textContent = wasRefined ? 'Yes ✨' : 'No';
+            
+            // Show copy button
+            document.getElementById('copyBtn').style.display = 'block';
+            
+            // Show success message
+            if (wasRefined) {
+                showStatus('✨ Email enhanced with AI for better professionalism!', 'success');
+            } else if (result.refineWarnings) {
+                showStatus('⚠️ AI enhancement had issues, showing baseline version', 'info');
+            } else {
+                showStatus('✅ Professional email generated successfully!', 'success');
+            }
+        }
+        
+        function getEmailCategory(result) {
+            if (result.baseline) return 'Auto-detected';
+            return 'Professional';
+        }
+        
+        function calculateQualityScore(result) {
+            const checks = result.checksAfter || result.checksBefore;
+            let score = 0;
+            if (checks.completeness) score += 25;
+            if (checks.professionalism) score += 25;
+            if (checks.clarity) score += 25;
+            if (checks.ethical) score += 25;
+            return `${score}/100`;
+        }
+        
+        function showLoading() {
+            document.getElementById('emailOutput').className = 'email-output loading';
+            document.getElementById('emailOutput').innerHTML = '<span class="loading-spinner"></span>Generating your professional email...';
+            document.getElementById('emailMeta').style.display = 'none';
+            document.getElementById('copyBtn').style.display = 'none';
+            hideStatus();
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.className = `status-indicator status-${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideStatus();
+            }, 5000);
+        }
+        
+        function hideStatus() {
+            document.getElementById('statusMessage').style.display = 'none';
+        }
+        
+        function copyToClipboard() {
+            if (!currentEmail) return;
+            
+            navigator.clipboard.writeText(currentEmail).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#28a745';
+                }, 2000);
+                
+                showStatus('Email copied to clipboard!', 'success');
+            }).catch(() => {
+                showStatus('Failed to copy. Please select and copy manually.', 'error');
+            });
+        }
+        
+        // Initialize with sample text
+        window.addEventListener('load', function() {
+            document.getElementById('emailText').value = "I would like to connect with you about software engineering opportunities at your company. I'm interested in learning more about your team and how I might contribute to your projects.";
+        });
+    </script>
+</body>
+</html>

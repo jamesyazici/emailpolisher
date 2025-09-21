@@ -1,0 +1,50 @@
+{
+  "name": "email-polisher",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "nodemon --exec \"ts-node --esm\" src/server.ts",
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "eslint src test --ext .ts",
+    "start": "node dist/server.js",
+    "build:exe": "npm run build && pkg dist/server.js --out-path build",
+    "build:all": "npm run build && pkg dist/server.js --targets node18-win-x64,node18-macos-x64,node18-linux-x64 --out-path build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.35.0",
+    "nodemon": "^3.1.10",
+    "pkg": "^5.8.1",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "pkg": {
+    "scripts": "dist/**/*.js",
+    "assets": [
+      "src/config/**/*"
+    ],
+    "targets": [
+      "node18-win-x64",
+      "node18-macos-x64",
+      "node18-linux-x64"
+    ],
+    "outputPath": "build"
+  }
+}
