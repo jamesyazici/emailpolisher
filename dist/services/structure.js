@@ -18,6 +18,106 @@ function extractPlaceholders(text) {
     const matches = text.match(/{[^}]+}/g);
     return matches ? matches.map(match => match.slice(1, -1)) : [];
 }
+function extractKeyInformation(text, category) {
+    const normalizedText = text.toLowerCase();
+    const extracted = {};
+    // Always use the original text as the core message purpose
+    extracted.message_purpose = text;
+    extracted.topic = text;
+    // Category-specific extraction patterns
+    switch (category) {
+        case 'networking':
+            extracted.email_goal = text;
+            // Look for specific networking goals
+            if (normalizedText.includes('internship')) {
+                extracted.topic = 'Professional Networking Opportunity';
+                extracted.email_goal = 'exploring internship opportunities';
+            }
+            else if (normalizedText.includes('job') || normalizedText.includes('position') || normalizedText.includes('role')) {
+                extracted.topic = 'Professional Networking Opportunity';
+                extracted.email_goal = 'exploring job opportunities';
+            }
+            else if (normalizedText.includes('research') || normalizedText.includes('ra')) {
+                extracted.topic = 'Research Collaboration Opportunity';
+                extracted.email_goal = 'exploring research opportunities';
+            }
+            else if (normalizedText.includes('coffee') || normalizedText.includes('chat') || normalizedText.includes('connect')) {
+                extracted.topic = 'Professional Connection';
+                extracted.email_goal = 'establishing a professional connection';
+            }
+            else {
+                extracted.topic = 'Professional Networking';
+                extracted.email_goal = 'professional networking and collaboration';
+            }
+            break;
+        case 'followup':
+            extracted.topic = normalizedText.includes('interview') ? 'Our Interview' :
+                normalizedText.includes('meeting') ? 'Our Meeting' :
+                    normalizedText.includes('conversation') ? 'Our Conversation' : 'Our Discussion';
+            extracted.desired_outcome = text;
+            extracted.prior_contact_date = 'last week';
+            break;
+        case 'referral':
+            // Extract company and role information
+            const companies = ['google', 'microsoft', 'amazon', 'meta', 'apple', 'netflix', 'facebook', 'tesla', 'uber', 'airbnb'];
+            const foundCompany = companies.find(company => normalizedText.includes(company));
+            if (foundCompany) {
+                extracted.target_company = foundCompany.charAt(0).toUpperCase() + foundCompany.slice(1);
+            }
+            if (normalizedText.includes('software engineer') || normalizedText.includes('swe')) {
+                extracted.role_or_position = 'Software Engineer position';
+            }
+            else if (normalizedText.includes('intern') || normalizedText.includes('internship')) {
+                extracted.role_or_position = 'Software Engineering Internship';
+            }
+            else if (normalizedText.includes('research') || normalizedText.includes('ra ')) {
+                extracted.role_or_position = 'Research Assistant position';
+            }
+            else if (normalizedText.includes('data scien')) {
+                extracted.role_or_position = 'Data Scientist position';
+            }
+            else if (normalizedText.includes('position') || normalizedText.includes('role')) {
+                // Extract the word before "position" or "role"
+                const positionMatch = text.match(/(\w+)\s+(position|role)/i);
+                if (positionMatch) {
+                    extracted.role_or_position = `${positionMatch[1]} ${positionMatch[2]}`;
+                }
+                else {
+                    extracted.role_or_position = 'the position';
+                }
+            }
+            else {
+                extracted.role_or_position = 'the position';
+            }
+            extracted.target_company = extracted.target_company || 'the company';
+            extracted.skills_or_projects = 'relevant technical experience and projects';
+            break;
+        case 'thankyou':
+            if (normalizedText.includes('interview')) {
+                extracted.specific_reason = 'taking the time to interview me';
+                extracted.topic = 'Interview Follow-up';
+            }
+            else if (normalizedText.includes('meeting')) {
+                extracted.specific_reason = 'meeting with me';
+                extracted.topic = 'Meeting Follow-up';
+            }
+            else if (normalizedText.includes('help') || normalizedText.includes('advice')) {
+                extracted.specific_reason = 'your guidance and advice';
+                extracted.topic = 'Thank You';
+            }
+            else {
+                extracted.specific_reason = 'your time and assistance';
+                extracted.topic = 'Thank You';
+            }
+            break;
+        case 'other':
+        default:
+            // For other/general emails, use the input more directly
+            extracted.topic = text.length > 50 ? 'Professional Inquiry' : text;
+            break;
+    }
+    return extracted;
+}
 function fillPlaceholders(template, overrides = {}) {
     let result = template;
     // Apply user overrides first
@@ -39,7 +139,10 @@ export function enforceStructure(input, category) {
     if (!categoryTemplate) {
         throw new Error(`Template not found for category: ${category}`);
     }
-    const overrides = input.overrides || {};
+    // Extract key information from the user's input text
+    const extractedInfo = extractKeyInformation(input.text, category);
+    // Merge user overrides with extracted information (user overrides take precedence)
+    const overrides = { ...extractedInfo, ...(input.overrides || {}) };
     // Extract subject
     const subject = fillPlaceholders(categoryTemplate.subject, overrides);
     // Extract greeting

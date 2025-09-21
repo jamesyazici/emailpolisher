@@ -15,6 +15,10 @@ const CATEGORY_RULES = {
         {
             phrases: ['reach out', 'reaching out', 'get in touch', 'opportunity to'],
             weight: 1
+        },
+        {
+            phrases: ['ra position', 'research assistant', 'internship', 'software engineering', 'opportunities'],
+            weight: 3
         }
     ],
     followup: [
@@ -33,6 +37,10 @@ const CATEGORY_RULES = {
         {
             phrases: ['gentle reminder', 'reminder', 'nudge', 'circling back'],
             weight: 2
+        },
+        {
+            phrases: ['my application', 'application status'],
+            weight: 3
         }
     ],
     referral: [
